@@ -1,0 +1,36 @@
+package com.example.databasetest;
+
+import android.accounts.Account;
+import android.accounts.OnAccountsUpdateListener;
+import android.app.Activity;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	private MyDatabaseHelper dbHelper;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		dbHelper = new MyDatabaseHelper(this, "BookStore", null, 1);
+		Button createDatabase = (Button)findViewById(R.id.create_database);
+		createDatabase.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dbHelper.getWritableDatabase();
+			}
+		});
+	}
+	}

@@ -10,9 +10,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
 	public static final String CREATE_BOOK = "create table Book("
 			+ "id integer primary key antoincrement,"
-			+ "anthor text," 
+			+ "author text," 
 			+ "price real," 
-			+ "pages integer'" 
+			+ "pages integer," 
 			+ "name text)";
 
 	private Context mContext;

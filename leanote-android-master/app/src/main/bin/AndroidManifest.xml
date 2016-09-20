@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.leanote.android"
+    android:installLocation="auto" >
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+
+    <!-- GCM all build types configuration -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <meta-data
+        android:name="UMENG_CHANNEL"
+        android:value="${UMENG_CHANNEL_VALUE}" />
+    <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="fdsfkjl;k4234f8989fsdf" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <!--android:icon="@drawable/leanote_launch_screen" android:noHistory="true"-->
+    <application
+        android:name=".Leanote"
+        android:allowBackup="true"
+        android:icon="@drawable/leanote_appicon"
+        android:label="@string/app_name"
+        android:theme="@style/Leanote"
+        tools:replace="android:icon, android:allowBackup" >
+        <activity
+            android:name=".ui.LeaLaunchActivity"
+            android:label="@string/title_activity_lea_launch"
+
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.LeaMainActivity" >
+        </activity>
+        <!-- <activity android:name=".ui.LeaMainActivity2" > -->
+        <!-- </activity> -->
+        <activity
+            android:name=".ui.SignInActivity"
+            android:label="@string/title_activity_sign_in"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".ui.accounts.NewAccountActivity"
+            android:label="@string/title_activity_new_account"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".ui.note.NoteDetailActivity"
+            android:label="@string/title_activity_note_detail" >
+        </activity>
+
+        <!-- <activity -->
+        <!-- android:name=".ui.note.EditNoteActivity" -->
+        <!-- android:label="@string/title_activity_edit_note" > -->
+
+        <!-- </activity> stateHidden| -->
+
+        <activity
+            android:name=".ui.note.EditNoteActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_edit_note"
+            android:theme="@style/CalypsoTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.note.NoteListActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.note.EditNotebookActivity"
+            android:label="@string/title_activity_edit_notebook" >
+        </activity>
+
+        <service
+            android:name=".ui.note.service.NoteUpdateService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="Note Update Service" >
+        </service>
+
+        <activity
+            android:name=".ui.note.NoteListActivity"
+            android:label="@string/title_activity_note_list" >
+        </activity>
+        <activity
+            android:name=".editor.legacy.EditLinkActivity"
+            android:label="@string/edit_link_activity" >
+        </activity>
+        <activity
+            android:name=".ui.note.NotePreviewActivity"
+            android:label="@string/title_activity_note_preview"
+            android:theme="@style/AppTheme4Preview" >
+        </activity>
+
+        <service
+            android:name=".ui.note.service.NoteUploadService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <service
+            android:name=".ui.note.service.NotebookUploadService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="Notebook Update Service" >
+        </service>
+
+        <activity
+            android:name=".ui.post.BlogHomeActivity"
+            android:theme="@style/LeanoteNoActionBarTheme" >
+        </activity>
+        <activity android:name=".ui.search.SearchActivity" >
+        </activity>
+        <activity
+            android:name=".ui.lea.LeaActivity"
+            android:label="@string/title_activity_lea"
+            android:theme="@style/LeanoteNoActionBarTheme" >
+        </activity>
+        <activity
+            android:name=".ui.note.NotesInNotebookActivity"
+            android:label="@string/title_activity_notes_in_notebook" >
+        </activity>
+    </application>
+
+</manifest>

@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button11"
-        android:text="@string/SecondAcitivity" />
+        android:text="@string/choose_fruits" />
 	<Button
         android:id="@+id/to_three"
         android:layout_width="match_parent"

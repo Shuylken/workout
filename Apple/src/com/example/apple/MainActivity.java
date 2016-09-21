@@ -34,7 +34,7 @@ public class MainActivity extends FourActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+				Intent intent = new Intent(MainActivity.this,Choose_Fruits.class);
 				startActivity(intent);
 			}
 			

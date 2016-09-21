@@ -1,0 +1,18 @@
+package com.example.apple;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.SimpleAdapter;
+
+public class Choose_Fruits extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		// ´´½¨Adapter
+		SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.fruits_item,
+				new String[] { "img", "title", "info" }, new int[] { R.id.img, R.id.title, R.id.info });
+		setListAdapter(adapter);
+	}
+}

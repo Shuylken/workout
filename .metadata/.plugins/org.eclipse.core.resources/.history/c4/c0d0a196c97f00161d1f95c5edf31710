@@ -1,0 +1,37 @@
+package com.example.apple;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+public class Choose_Fruits extends Activity {
+	private ListView listView;
+	@Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.choose_fruits);
+        listView = (ListView)this.findViewById(R.id.listview);
+        DBService service = new DBService(this);
+        List<Person> persons = service.pageQuery(0, 10);
+        List<HashMap<String,Object>> data = new ArrayList<HashMap<String,Object>>();
+        for(Person person:persons){
+        	HashMap<String,Object>map = new HashMap<String,Object>();
+        	map.put("id", person.getId());
+        	map.put("name", person.getName());
+        	map.put("age", person.getAge());
+        	data.add(map);
+        }
+        System.out.println(data);
+        SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.item, new String[]{"id","name","age"}, new int[]{R.id.id1,R.id.name,R.id.age});
+//data表示显示的数据，一个Map为一行，List<Map>表示多行
+//R.layout.item表示一个item的布局
+//new String[]{"id","name","age"}表示将key="id"的值映射到R.id.id1上
+        listView.setAdapter(adapter);
+	}
+}

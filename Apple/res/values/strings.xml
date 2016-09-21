@@ -5,7 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Apple</string>
 	<string name="Web">Web跳转</string>
-	<string name="SecondAcitivity">挑选水果</string>
+	<string name="choose_fruits">挑选水果</string>
 	<string name="ThreeAcitivity">ThreeAcitivity</string>
 	<string name="s_view_btn">more</string>
+	<string name="text_choosefruits">ChooseFrutis</string>
 </resources>

@@ -33,4 +33,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/to_Second"
         android:text="@string/ThreeAcitivity" />
+	
+	<Button
+        android:id="@+id/to_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/to_three"
+        android:text="@string/FourAcitivity" />
+	
+	<Button
+        android:id="@+id/browser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/to_four"
+        android:text="@string/browser_name" />
 </RelativeLayout>

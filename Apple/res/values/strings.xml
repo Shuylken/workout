@@ -7,6 +7,9 @@
 	<string name="Web">Web跳转</string>
 	<string name="choose_fruits">挑选水果</string>
 	<string name="ThreeAcitivity">ThreeAcitivity</string>
+	<string name="FourAcitivity">设置</string>
 	<string name="s_view_btn">more</string>
 	<string name="text_choosefruits">ChooseFrutis</string>
+	<string name="wifi">WLAN</string>
+	<string name="browser_name">启动浏览器</string>
 </resources>

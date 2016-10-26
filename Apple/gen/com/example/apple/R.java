@@ -75,6 +75,7 @@ public final class R {
         public static final int hello_world=0x7f050002;
         public static final int s_view_btn=0x7f050007;
         public static final int text_choosefruits=0x7f050008;
+        public static final int title=0x7f05000b;
         public static final int wifi=0x7f050009;
     }
     public static final class style {

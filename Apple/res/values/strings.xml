@@ -12,4 +12,5 @@
 	<string name="text_choosefruits">ChooseFrutis</string>
 	<string name="wifi">WLAN</string>
 	<string name="browser_name">启动浏览器</string>
+	<string name="title">I am %1$d years old</string>
 </resources>

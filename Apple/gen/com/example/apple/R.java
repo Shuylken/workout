@@ -29,27 +29,39 @@ public final class R {
         public static final int switch_btn=0x7f020005;
     }
     public static final class id {
-        public static final int B1=0x7f080013;
-        public static final int action_settings=0x7f080014;
-        public static final int back=0x7f08000f;
-        public static final int brower_title_layout=0x7f080006;
+        public static final int B1=0x7f08001f;
+        public static final int action_settings=0x7f080020;
+        public static final int back=0x7f080011;
         public static final int browser=0x7f080005;
+        public static final int btnLayout=0x7f080010;
+        public static final int button1=0x7f080006;
         public static final int button11=0x7f080001;
-        public static final int img=0x7f08000a;
-        public static final int info=0x7f080008;
-        public static final int listview=0x7f080009;
-        public static final int mTogBtn=0x7f08000e;
+        public static final int button2=0x7f080007;
+        public static final int button3=0x7f080008;
+        public static final int button4=0x7f080009;
+        public static final int button5=0x7f08000a;
+        public static final int button6=0x7f08000b;
+        public static final int button7=0x7f08000c;
+        public static final int button8=0x7f08000d;
+        public static final int forward=0x7f080012;
+        public static final int home=0x7f080014;
+        public static final int img=0x7f080017;
+        public static final int info=0x7f080015;
+        public static final int listview=0x7f080016;
+        public static final int mTogBtn=0x7f08001b;
+        public static final int refresh=0x7f080013;
+        public static final int show=0x7f08000f;
         public static final int text=0x7f080000;
-        public static final int textinfo=0x7f08000c;
-        public static final int title=0x7f08000b;
-        public static final int title_layout=0x7f080012;
-        public static final int title_text=0x7f080010;
-        public static final int to=0x7f080011;
+        public static final int textinfo=0x7f080019;
+        public static final int title=0x7f080018;
+        public static final int title_layout=0x7f08001e;
+        public static final int title_text=0x7f08001c;
+        public static final int to=0x7f08001d;
         public static final int to_Second=0x7f080002;
         public static final int to_four=0x7f080004;
         public static final int to_three=0x7f080003;
-        public static final int webView=0x7f080007;
-        public static final int wifi_clock=0x7f08000d;
+        public static final int url=0x7f08000e;
+        public static final int wifi_clock=0x7f08001a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -70,12 +82,17 @@ public final class R {
         public static final int Web=0x7f050003;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int back=0x7f05000d;
         public static final int browser_name=0x7f05000a;
         public static final int choose_fruits=0x7f050004;
+        public static final int forward=0x7f05000e;
         public static final int hello_world=0x7f050002;
+        public static final int home=0x7f050010;
+        public static final int refresh=0x7f05000f;
         public static final int s_view_btn=0x7f050007;
         public static final int text_choosefruits=0x7f050008;
         public static final int title=0x7f05000b;
+        public static final int url=0x7f05000c;
         public static final int wifi=0x7f050009;
     }
     public static final class style {

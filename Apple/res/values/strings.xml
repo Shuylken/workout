@@ -13,4 +13,9 @@
 	<string name="wifi">WLAN</string>
 	<string name="browser_name">启动浏览器</string>
 	<string name="title">I am %1$d years old</string>
+	<string name="url">https://www.baidu.com/</string>
+	<string name="back">Back</string>
+	<string name="forward">Forward</string>
+	<string name="refresh">Refresh</string>
+	<string name="home">Home</string>
 </resources>

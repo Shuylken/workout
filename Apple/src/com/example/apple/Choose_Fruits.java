@@ -48,7 +48,6 @@ public class Choose_Fruits extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.choose_fruits);
 		List<Map<String, Object>> ListItems = new ArrayList<Map<String, Object>>();
-
 		// 将每一条记录添加到Map中
 		for (int i = 0; i < names.length; i++) {
 			Map<String, Object> listItem = new HashMap<String, Object>();
@@ -72,7 +71,6 @@ public class Choose_Fruits extends Activity {
 		 * R.layout.fruits_item, new String[] { "img", "title", "info" }, new
 		 * int[] { R.id.img, R.id.title, R.id.info }); //
 		 * setListAdapter(adapter); lv.setAdapter(simpleadapter);
-		 * 
 		 * 添加点击事件 lv.setOnItemClickListener(new OnItemClickListenerImp());
 		 */
 		OnItemClickListener mItemClickListener = new OnItemClickListener() {

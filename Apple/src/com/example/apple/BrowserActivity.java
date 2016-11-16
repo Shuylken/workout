@@ -1,18 +1,25 @@
 package com.example.apple;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 /*
  * 显示第tabhost 的第一个Activity，本activity 主要显示设备列表
@@ -21,114 +28,153 @@ import android.widget.TextView;
  *
  */
 public class BrowserActivity extends Activity {
-	private WebView webView;
-	private ProgressDialog mPgrogressDialog;
-	private TextView tv_title;
 
-	private Button btn_left;
-	private Button btn_right;
+	AutoCompleteTextView url;
+	WebView show;
 
-	private String url = "https://www.baidu.com/";
+	String[] booksArray = new String[] { "http://maps.google.com", "http://maps.baidu.com", "http://qq.com",
+			"www.baidu.com", "www.163.com" };
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.browser_layout);
 
-		// 获取传递的参数
-		Intent it = getIntent();
-		String u = it.getStringExtra("url");
-		if (!TextUtils.isEmpty(u)) {
-			url = u;
-		}
+		final Activity activity = this;
 
-		webView = (WebView) this.findViewById(R.id.webView);
-		tv_title = (TextView) this.findViewById(R.id.title_text);
-		btn_left = (Button) this.findViewById(R.id.back);
-		btn_right = (Button) this.findViewById(R.id.to);
+		show = (WebView) findViewById(R.id.show);
+		show.getSettings().setJavaScriptEnabled(true);
+		show.getSettings().setBuiltInZoomControls(true);
+		// show.getSettings().setDisplayZoomControls(false);
+		show.setWebViewClient(new WebViewClient() {
+			public boolean shouldOverrideUrlLoading(WebView view, String strUrl) {
+				view.loadUrl(strUrl);
+				url.setText(strUrl);
+				return false;
+			}
 
-		btn_left.setVisibility(View.VISIBLE);
-		btn_right.setVisibility(View.VISIBLE);
-		btn_left.setText("返回");
-		btn_right.setText("刷新");
+			public void onPageStarted(WebView view, String strUrl, Bitmap favicon) {
+				super.onPageStarted(view, strUrl, favicon);
+				url.setText(strUrl);
+			}
 
-		// 返回事件
-		btn_left.setOnClickListener(new OnClickListener() {
+			public void onPageFinished(WebView view, String strUrl) {
+			}
 
-			@Override
-			public void onClick(View v) {
-				finish();
+			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+				Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
 			}
 		});
 
-		// 刷新事件
-		btn_right.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mPgrogressDialog.show();
-				webView.loadUrl(url);
+		url = (AutoCompleteTextView) findViewById(R.id.url);
+		ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,
+				booksArray);
+		url.setAdapter(aa);
+		url.setOnKeyListener(new View.OnKeyListener() {
+			public boolean onKey(View v, int keyCode, KeyEvent ev) {
+				if (keyCode == KeyEvent.KEYCODE_ENTER) {
+					String strUrl = url.getText().toString();
+
+					Pattern p = Pattern.compile("http://([\\w-]+\\.)+[\\w-]+(/[\\w-\\./?%=]*)?");
+					Matcher m = p.matcher(strUrl);
+					if (!m.find()) {
+						strUrl = "http://" + strUrl;
+					}
+
+					show.loadUrl(strUrl);
+
+					return true;
+				}
+
+				return false;
 			}
 		});
 
-		// 显示网页加载中的小菊华花
-		mPgrogressDialog = new ProgressDialog(this);
-		mPgrogressDialog.setTitle("");
-		mPgrogressDialog.setMessage("正在加载网页...");
-		mPgrogressDialog.show();
+		// button
+		final Button backBtn = (Button) findViewById(R.id.back);
+		final Button forwardBtn = (Button) findViewById(R.id.forward);
+		Button refreshBtn = (Button) findViewById(R.id.refresh);
+		Button homeBtn = (Button) findViewById(R.id.home);
+		backBtn.setEnabled(false);
+		forwardBtn.setEnabled(false);
 
-		webView.getSettings().setDefaultTextEncodingName("gbk");
+		backBtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				show.goBack();
+			}
+		});
 
-		// 在线程里启动网页加载
-		new Thread(new Runnable() {
+		forwardBtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// TODO
+				show.goForward();
+			}
+		});
+
+		refreshBtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// TODO
+				String strUrl = url.getText().toString();
+				show.loadUrl(strUrl);
+			}
+		});
+
+		homeBtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// TODO
+				show.loadUrl("https://www.baidu.com/");
+			}
+		});
+
+		final Handler handler = new Handler(){
 			@Override
+			public void handleMessage(Message msg) {
+				if (msg.what == 0x1111) {
+					// whether can go back
+					if (show.canGoBack()) {
+						backBtn.setEnabled(true);
+					} else {
+						backBtn.setEnabled(false);
+					}
+
+					// whether can go forward
+					if (show.canGoForward()) {
+						forwardBtn.setEnabled(true);
+					} else {
+						forwardBtn.setEnabled(false);
+					}
+				}
+
+				super.handleMessage(msg);
+			}
+		};
+
+		// create thread to change button states
+		new Timer().schedule(new TimerTask() {
 			public void run() {
-				webView.loadUrl(url);
-
+				Message msg = new Message();
+				msg.what = 0x1111;
+				handler.sendMessage(msg);
 			}
-		}).start();
+		}, 0, 100);
+	}
 
-		webView.getSettings().setJavaScriptEnabled(true);
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// Check if the key event was the Back button and if there's history
+		if ((keyCode == KeyEvent.KEYCODE_BACK) && show.canGoBack()) {
+			show.goBack();
+			return true;
+		}
+		// If it wasn't the Back key or there's no web page history, bubble up
+		// to the default
+		// system behavior (probably exit the activity)
+		return super.onKeyDown(keyCode, event);
+	}
 
-		webView.setWebChromeClient(new WebChromeClient() {
-			@Override
-			public void onReceivedTitle(WebView view, String title) {
-				// TODO Auto-generated method stub
-				super.onReceivedTitle(view, title);
-				final String tmpTitle = title;
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						tv_title.setText(tmpTitle);
-					}
-				});
-			}
-		});
-
-		webView.setWebViewClient(new WebViewClient() {
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				view.loadUrl(url);
-				return true;
-			}
-
-			@Override
-			public void onPageFinished(WebView view, String url) {
-
-				super.onPageFinished(view, url);
-
-				runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						mPgrogressDialog.dismiss();
-					}
-				});
-
-			}
-
-			@Override
-			public void onPageStarted(WebView view, String url, Bitmap favicon) {
-				super.onPageStarted(view, url, favicon);
-			}
-		});
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.id.browser, menu);
+		return true;
 	}
 }
